@@ -1,5 +1,6 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
+import { version } from 'vue'
 
 defineProps({
     canLogin: {
@@ -23,7 +24,17 @@ function handleImageError() {
     document.getElementById('docs-card')?.classList.add('!row-span-1');
     document.getElementById('docs-card-content')?.classList.add('!flex-row');
     document.getElementById('background')?.classList.add('!hidden');
-}
+};
+
+const todaystring = (date) => {
+    let weekdays = ["日", "月", "火", "水", "木", "金", "土"];
+    let year = date.getFullYear();
+    let month = (date.getMonth() + 1);
+    let day = date.getDate();
+    let weekday = weekdays[date.getDay()];
+    return year + '年' + month  + '月' + day + '日' + ' ' + weekday + '曜日'
+};
+
 </script>
 
 <template>
@@ -378,7 +389,8 @@ function handleImageError() {
                 <footer
                     class="py-16 text-center text-sm text-black dark:text-white/70"
                 >
-                    Laravel v{{ laravelVersion }} (PHP v{{ phpVersion }})
+                    {{ todaystring(new Date()) }}<br/>
+                    Laravel v{{ laravelVersion }} (PHP v{{ phpVersion }})  Vue.js v{{ version }}
                 </footer>
             </div>
         </div>
