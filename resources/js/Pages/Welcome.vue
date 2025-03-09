@@ -390,7 +390,8 @@ const todaystring = (date) => {
                     class="py-16 text-center text-sm text-black dark:text-white/70"
                 >
                     {{ todaystring(new Date()) }}<br/>
-                    Laravel v{{ laravelVersion }} (PHP v{{ phpVersion }})  Vue.js v{{ version }}
+                    Laravel v{{ laravelVersion }} (PHP v{{ phpVersion }}) <br/>
+                    Vue.js v{{ version }}
                 </footer>
             </div>
         </div>
