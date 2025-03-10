@@ -31,12 +31,16 @@ class HistoryController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|max:50',
-            'body' =>  'required|max:250',
+            'detail' =>  'required|max:250',
         ]);
 
-        $history = History::create($validated);
+        $history = History::create([
+            'title' => $request->title,
+            'detail' => $request->detail,
+        ]);
 
-        return redirect()->route('history.index');
+
+        return redirect()->route('history.create');
         
     }
 

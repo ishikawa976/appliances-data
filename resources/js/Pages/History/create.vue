@@ -14,6 +14,8 @@ const form = useForm({
 
     const createHistory = () => {
         form.post(route("history.store"));
+        console.log(form.title);
+        console.log(form.detail);
     };
 </script>
 
@@ -21,7 +23,7 @@ const form = useForm({
     <Head title="Histrory" />
 
     <AuthenticatedLayout>
-        <GuestLayout>
+        
             <template #header>
                 <h2
                     class="text-xl font-semibold leading-tight text-gray-800"
@@ -29,9 +31,7 @@ const form = useForm({
                     履歴登録
                 </h2>
             </template>
-
-        <div>
-            
+        <GuestLayout>
             <form @submit.prevent="createHistory">
             <div>
                 <InputLabel for="title" value="タイトル" />
@@ -46,13 +46,12 @@ const form = useForm({
             </div>
             <div>
                 <InputLabel for="detail" value="内容" />
-                <textarea v-model="form.deteil"></textarea>
+                <textarea v-model="form.detail"></textarea>
             </div>
             <div>
                 <PrimaryButton> 登録 </PrimaryButton>
             </div>
             </form>
-        </div>
         </GuestLayout>
         
     </AuthenticatedLayout>
