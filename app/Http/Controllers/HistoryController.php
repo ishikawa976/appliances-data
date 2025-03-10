@@ -13,7 +13,7 @@ class HistoryController extends Controller
      */
     public function index()
     {
-         return Inertia::render('History/index');
+         return Inertia::render('History/index',['histories' => History::all()]);
     }
 
     /**
