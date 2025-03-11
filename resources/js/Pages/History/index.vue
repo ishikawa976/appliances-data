@@ -29,7 +29,7 @@
                     <div class="flex flex-row gap-4">
                         <div>{{ todaystring(history.created_at) }}</div>
                         <div>
-                            <a href="{{route('history.show', $post)}}" class="text-blue-600">
+                            <a :href="route('history.show', history.id)" class="text-blue-600">
                              {{ history.title }}
                             </a>
                         </div>

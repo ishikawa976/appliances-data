@@ -13,7 +13,8 @@ class HistoryController extends Controller
      */
     public function index()
     {
-         return Inertia::render('History/index',['histories' => History::all()]);
+        $histories = History::orderby('created_at', 'desc')->get();
+         return Inertia::render('History/index',['histories' => $histories]);
     }
 
     /**
@@ -47,9 +48,11 @@ class HistoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(History $history)
-    {
-        return Inertia::render('history.show', compact('history'));
+    public function show($id)  {
+        $history = History::find($id);
+        //dd($history);
+        return Inertia::render('History/show',['history' => $history]);
+        
     }
 
     /**
