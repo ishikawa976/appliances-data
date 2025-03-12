@@ -1,8 +1,9 @@
 <script setup>
     import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
     import PrimaryButton from "@/Components/PrimaryButton.vue";
-    import { Head, Link } from '@inertiajs/vue3';
+    import { Head, Link, useForm } from '@inertiajs/vue3';
 
+    const form = useForm({});
 
     defineProps({
         history: Object,
@@ -10,9 +11,7 @@
 
 
     const deleteHistory = (id) => {
-        form.delete(route("history.destroy", id), {
-            preserveScroll: true,
-        });
+        form.delete(route("history.destroy", id));
     };
 
     const daystring = (date) => {

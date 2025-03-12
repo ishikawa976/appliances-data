@@ -41,7 +41,7 @@ class HistoryController extends Controller
         ]);
 
 
-        return redirect()->route('history.create');
+        return redirect()->route('history.index');
         
     }
 
@@ -58,9 +58,11 @@ class HistoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(History $history)
+    public function edit($id)
     {
-        return Inertia::render('History/edit', compact('history'));
+        $history = History::find($id);
+        //dd($history);
+        return Inertia::render('History/edit', ['history' => $history]);
     }
 
     /**
@@ -69,8 +71,8 @@ class HistoryController extends Controller
     public function update(Request $request, History $history)
     {
         $validated = $request->validate([
-            'title' => 'required|max:50',
-            'body' =>  'required|max:250'
+            'title' => 'required',
+            'detail' =>  'required',
         ]);
 
         $history->update($validated);
