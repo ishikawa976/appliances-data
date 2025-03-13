@@ -22,20 +22,23 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 更新履歴一覧
             </h2>
+            <a :href="route('history.create')">
+                新規登録
+            </a>
         </template>
-        <div class="flex justify-center">
-            <div class="bg-white mt-6 p-4 flex justify-center">
+            <div class="bg-white mx-6 my-6 px-12 py-6">
                 <div v-for="history in histories" :key=history.id>
-                    <div class="flex flex-row gap-4">
-                        <div>{{ todaystring(history.created_at) }}</div>
-                        <div>
-                            <a :href="route('history.show', history.id)" class="text-blue-600">
-                             {{ history.title }}
-                            </a>
+                    <div class="flex flex-col p-2">
+                        <div class="flex flex-row gap-24">
+                            <div>{{ todaystring(history.created_at) }}</div>
+                            <div>
+                                <a :href="route('history.show', history.id)" class="text-blue-600">
+                                     {{ history.title }}
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
     </AuthenticatedLayout>
 </template>

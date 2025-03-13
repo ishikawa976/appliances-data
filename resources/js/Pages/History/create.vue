@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
+//import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import PrimaryButton from '@/Components/PrimaryButton.vue';
@@ -31,7 +31,7 @@ const form = useForm({
                     履歴登録
                 </h2>
             </template>
-        <GuestLayout>
+        <div class="bg-white mx-6 my-6 px-36 py-6">
             <form @submit.prevent="createHistory">
             <div>
                 <InputLabel for="title" value="タイトル" />
@@ -40,19 +40,20 @@ const form = useForm({
                     id="title" 
                     type="text"
                      v-model="form.title"
+                     class="w-full"
                 />
                 
                 <InputError class="mt-2" :message="form.errors.name" />
             </div>
-            <div>
+            <div class="mt-8">
                 <InputLabel for="detail" value="内容" />
-                <textarea v-model="form.detail"></textarea>
+                <textarea v-model="form.detail" class="w-full h-40"></textarea>
             </div>
-            <div>
+            <div class="mt-8">
                 <PrimaryButton> 登録 </PrimaryButton>
             </div>
             </form>
-        </GuestLayout>
+        </div>
         
     </AuthenticatedLayout>
 </template>
