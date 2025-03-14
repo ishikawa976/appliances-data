@@ -30,29 +30,31 @@
                 履歴情報
             </h2>
         </template>
-        <div class = "bg-white mt-6 p-4">
+        
+        <div class="bg-white mx-6 my-6 px-40 py-6">
             <div>
-                <div>
-                   <h1>{{ history.title }}</h1>
-                </div>
-                <div>
-                    <Link :href="route('history.edit', history.id)">
-                        <PrimaryButton type="button">更新</PrimaryButton>
-                    </Link>
-                    <PrimaryButton type="button"@click="deleteHistory(history.id)">
-                        削除
-                    </PrimaryButton>
+                <div class="text-2xl">
+                   {{ history.title }}
                 </div>
             </div>
-            <div>
-                登録日  {{ daystring(history.created_at) }}
+            <div class="mt-4 float-right">
+                <div>
+                    登録日  {{ daystring(history.created_at) }}
+                </div>
+                <div v-if="history.updated_at !== history.created_at">
+                    更新日　{{ daystring(history.updated_at) }}
+                </div>
             </div>
-            <div v-if="history.updated_at !== history.created_at">
-                更新日　{{ daystring(history.updated_at) }}
-            </div>
-            
-            <div>
+            <div class="mt-8">
                 {{ history.detail }}
+            </div>
+             <div class="mt-4 flex flex-row gap-4">
+                <Link :href="route('history.edit', history.id)">
+                    <PrimaryButton type="button">更新</PrimaryButton>
+                </Link>
+                <PrimaryButton type="button"@click="deleteHistory(history.id)">
+                    削除
+                </PrimaryButton>
             </div>
         </div>
     </AuthenticatedLayout>
