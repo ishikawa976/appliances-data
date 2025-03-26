@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-//import CategoryCreate from '@/Components/Category/CategoryCreate.vue';
+import CategoryCreate from '@/Components/Category/CategoryCreate.vue';
 </script>
 
 <template>
@@ -10,7 +10,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
                 各種登録
             </h2>
         </template>
-        <div>
+        <div class="bg-white mx-6 my-6 px-36 py-6">
             <CategoryCreate />
         </div>
     </AuthenticatedLayout>
