@@ -34,4 +34,6 @@ Route::resource('history', HistoryController::class);
 
 Route::get('/config', [ConfigController::class, 'index'])->name('config.index');
 
+Route::resource('category', CategoryController::class);
+
 require __DIR__.'/auth.php';
