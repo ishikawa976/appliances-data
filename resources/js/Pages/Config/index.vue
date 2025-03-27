@@ -1,6 +1,12 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import CategoryCreate from '@/Pages/Category/Create.vue';
+import CategoryEdit from '@/Pages/Category/Edit.vue';
+
+const props = defineProps({
+        categories: Array,
+    });
+
 </script>
 
 <template>
@@ -12,6 +18,9 @@ import CategoryCreate from '@/Pages/Category/Create.vue';
         </template>
         <div>
             <CategoryCreate />
+        </div>
+        <div>
+            <CategoryEdit categories="props.categories"/>
         </div>
     </AuthenticatedLayout>
 </template>
