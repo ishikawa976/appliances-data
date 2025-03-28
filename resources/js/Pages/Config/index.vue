@@ -20,7 +20,7 @@ const props = defineProps({
             <CategoryCreate />
         </div>
         <div>
-            <CategoryEdit categories="props.categories"/>
+            <CategoryEdit :categories=props.categories />
         </div>
     </AuthenticatedLayout>
 </template>

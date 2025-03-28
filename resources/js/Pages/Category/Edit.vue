@@ -9,13 +9,13 @@ const props = defineProps({
         categories: Array,
     });
 
-const form = useForm({
-    name: "",
+const form = useForm({ 
+    id : "",
+    name : "",
 });
 
     const editCategory = () => {
-        form.post(route("category.edit"));
-        form.name=""
+        form.post(route("category.update", form.id));
     };
 </script>
 
@@ -24,12 +24,13 @@ const form = useForm({
         <form @submit.prevent="editCategory">
             カテゴリー編集
             <InputLabel class="mt-8" for="name" value="カテゴリー名" />
-
-             <select v-model="form.name" class="mt-4 w-full">
-                <div v-for="category in props.categories" :key=category.id>
+            <input  class="mt-4 w-full" v-model="form.name" list="categorylist"/>
+             <datalist id="categorylist">
+                <div v-for="category in categories" :key=category.id>
                     <option>{{ category.name }}</option>
                 </div>
-            </select>
+            </datalist>
+            
             <InputError class="mt-2" :message="form.errors.name" />
             <div class="mt-8">
                 <PrimaryButton> 登録 </PrimaryButton>
