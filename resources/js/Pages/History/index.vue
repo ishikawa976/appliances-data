@@ -26,7 +26,7 @@
                 新規登録
             </a>
         </template>
-            <div class="bg-white mx-6 my-6 px-12 py-6">
+            <div class="bg-white mx-24 my-12 px-12 py-6">
                 <div v-for="history in histories" :key=history.id>
                     <div class="flex flex-col p-2">
                         <div class="flex flex-row gap-24">

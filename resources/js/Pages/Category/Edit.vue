@@ -28,7 +28,7 @@ const deleteCategory = (id) => {
     };
 </script>
 
-<template><div class="bg-white mx-12 my-6 px-36 py-6">
+<template><div class="bg-white mx-36 my-6 px-36 py-6">
     
         <form @submit.prevent="editCategory()">
             カテゴリー編集

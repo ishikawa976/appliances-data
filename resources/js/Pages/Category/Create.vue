@@ -16,7 +16,7 @@ const form = useForm({
 </script>
 
 <template>
-    <div class="bg-white mx-12 my-6 px-36 py-6">
+    <div class="bg-white mx-36 my-6 px-36 py-6">
         <form @submit.prevent="createCategory">
             カテゴリー登録
             <InputLabel class="mt-8" for="name" value="カテゴリー名" />
