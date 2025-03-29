@@ -1,10 +1,10 @@
 <script setup>
 import InputLabel from "@/Components/InputLabel.vue";
-//import TextInput from "@/Components/TextInput.vue";
+import TextInput from "@/Components/TextInput.vue";
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import InputError from '@/Components/InputError.vue';
 import { useForm } from '@inertiajs/vue3';
-import TextInput from "@/Components/TextInput.vue";
+import DeleteButton from '@/Components/DeleteButton.vue';
 
 const props = defineProps({
         categories: Array,
@@ -15,12 +15,17 @@ const form = useForm({
     name : "",
 });
 
-    const editCategory = () => {
-        console.log(form.id)
-        console.log(form.name)
-        form.put(route("category.update", form.id));
-    };
+//const deleteform = useForm({});
 
+const editCategory = () => {
+    console.log(form.id)
+    console.log(form.name)
+    form.put(route("category.update", form.id));
+};
+
+const deleteCategory = (id) => {
+        form.delete(route("category.destroy", id));
+    };
 </script>
 
 <template><div class="bg-white mx-12 my-6 px-36 py-6">
@@ -41,8 +46,15 @@ const form = useForm({
             />
 
             <InputError class="mt-2" :message="form.errors.name" />
-            <div class="mt-8">
-                <PrimaryButton> 登録 </PrimaryButton>
+            <div class="flex flex-row gap-4">
+                <div class="mt-8">
+                    <PrimaryButton> 登録 </PrimaryButton>
+                </div>
+                <div class="mt-8">
+                    <DeleteButton type="button"@click="deleteCategory(form.id)">
+                        削除
+                    </DeleteButton>
+                </div>
             </div>
         </form>
     </div>
