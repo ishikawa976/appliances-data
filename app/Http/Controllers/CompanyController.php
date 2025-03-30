@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CompanyCategory;
+use App\Models\Company;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -28,13 +28,19 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:50',
+        ]);
+
+        $company = Company::create([
+            'name' => $request->name,
+        ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(CompanyCategory $companyCategory)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +48,7 @@ class CompanyController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CompanyCategory $companyCategory)
+    public function edit(string $id)
     {
         //
     }
@@ -50,16 +56,25 @@ class CompanyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CompanyCategory $companyCategory)
+    public function update(Request $request, Company $company)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:50',
+        ]);
+
+            $company->update($validated);
+
+            return redirect()->route('config.index');
+        
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CompanyCategory $companyCategory)
+    public function destroy(Company $company)
     {
-        //
+        $company->delete();
+
+        return redirect()->route('config.index');
     }
 }

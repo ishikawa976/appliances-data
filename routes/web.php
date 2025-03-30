@@ -7,6 +7,8 @@ use Inertia\Inertia;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ConfigController;
+use App\Http\Controllers\MakerController;
+use App\Http\Controllers\CompanyController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -35,5 +37,9 @@ Route::resource('history', HistoryController::class);
 Route::get('/config', [ConfigController::class, 'index'])->name('config.index');
 
 Route::resource('category', CategoryController::class);
+
+Route::resource('maker', MakerController::class);
+
+Route::resource('company', CompanyController::class);
 
 require __DIR__.'/auth.php';

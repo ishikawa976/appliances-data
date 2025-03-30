@@ -45,7 +45,7 @@
                     更新日　{{ daystring(history.updated_at) }}
                 </div>
             </div>
-            <div class="mt-8">
+            <div class="mt-12">
                 {{ history.detail }}
             </div>
              <div class="mt-4 flex flex-row gap-4">

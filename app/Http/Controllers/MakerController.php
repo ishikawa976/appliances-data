@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MakerCategory;
+use App\Models\Maker;
 use Illuminate\Http\Request;
 
 class MakerController extends Controller
@@ -28,13 +28,22 @@ class MakerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:50',
+        ]);
+
+        $maker = Maker::create([
+            'name' => $request->name,
+        ]);
+
+
+        return redirect()->route('config.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(MakerCategory $makerCategory)
+    public function show(Maker $maker)
     {
         //
     }
@@ -42,7 +51,7 @@ class MakerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MakerCategory $makerCategory)
+    public function edit(Maker $maker)
     {
         //
     }
@@ -50,16 +59,25 @@ class MakerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MakerCategory $makerCategory)
+    public function update(Request $request, Maker $maker)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:50',
+        ]);
+
+        $maker->update($validated);
+
+        return redirect()->route('config.index');
     }
+    
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MakerCategory $makerCategory)
+    public function destroy(Maker $maker)
     {
-        //
+        $maker->delete();
+
+       return redirect()->route('config.index');
     }
 }
