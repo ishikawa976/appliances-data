@@ -8,17 +8,18 @@ import { Head, useForm } from '@inertiajs/vue3';
 
 const props = defineProps({
        companies: Array,
+       shop: Object,
 });
 
 const form = useForm({
-    company_id: "",
-    shop_name: "",
-    url: "",
-    status: "",
+    company_id: props.shop.company_id,
+    shop_name: props.shop.shop_name,
+    url: props.shop.url,
+    status: props.shop.status,
 });
 
-    const createShop = () => {
-        form.post(route("shop.store"));
+    const editShop = () => {
+        form.patch(route("shop.update", props.shop.id));
     };
 </script>
 
@@ -29,11 +30,11 @@ const form = useForm({
             <h2
                 class="text-xl font-semibold leading-tight text-gray-800"
             >
-                販売店舗登録
+                販売店舗情報更新
             </h2>
         </template>
         <div class="bg-white mx-48 my-6 px-60 py-6">
-            <form @submit.prevent="createShop">
+            <form @submit.prevent="editShop">
                 <div class="flex justify-center flex-col gap-4">
                     <div>
                         <InputLabel for="company" value="会社" />
