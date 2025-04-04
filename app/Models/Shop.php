@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Company;
 
 class Shop extends Model
 {
@@ -11,7 +12,16 @@ class Shop extends Model
         'id',
     ];
 
+    protected $appends = [
+        'full_name',
+    ];
+
+    protected function getFullNameAttribute() {
+        $company = Company::find($this->company_id);
+        return $company->name.' '.$this->shop_name;
+    }
+
     public function company() {
-        return $this->belongTo(Company::class);
+        return $this->belongsTo(Company::class);
     }
 }

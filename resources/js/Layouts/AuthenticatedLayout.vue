@@ -56,6 +56,14 @@ const showingNavigationDropdown = ref(false);
                                    各種登録画面
                                 </NavLink>
                             </div>
+                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <NavLink
+                                    :href="route('shop.create')"
+                                    :active="route().current('shop.create')"
+                                >
+                                   販売店舗登録
+                                </NavLink>
+                            </div>
                         </div>
 
                         <div class="hidden sm:ms-6 sm:flex sm:items-center">

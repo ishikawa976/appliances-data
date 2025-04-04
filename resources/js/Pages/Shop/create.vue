@@ -19,6 +19,7 @@ const form = useForm({
 
     const createShop = () => {
         form.post(route("shop.store"));
+        console.log(form.shop_name)
     };
 </script>
 
@@ -31,6 +32,9 @@ const form = useForm({
             >
                 販売店舗登録
             </h2>
+            <a :href="route('shop.index')">
+                登録済店舗名一覧
+            </a>
         </template>
         <div class="bg-white mx-48 my-6 px-60 py-6">
             <form @submit.prevent="createShop">
@@ -72,7 +76,7 @@ const form = useForm({
                     <div class="mt-8">
                         <PrimaryButton> 登録 </PrimaryButton>
                     </div>
-                </div>
+               </div>
             </form>
         </div>
     </AuthenticatedLayout>
