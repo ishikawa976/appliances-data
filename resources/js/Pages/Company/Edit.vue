@@ -31,7 +31,7 @@ const deleteCompany = (id) => {
 <template><div class="bg-white mx-36 my-6 px-36 py-6">
     
         <form @submit.prevent="editCompany()">
-            カテゴリー編集
+            販売会社編集
             <InputLabel class="mt-8" for="name" value="販売会社名" />
             <select v-model="form.id" class="mt-4 w-full">
                 <option v-for="company in companies" :value = "company.id">{{ company.name }}</option>
