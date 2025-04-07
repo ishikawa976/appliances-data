@@ -10,6 +10,8 @@ use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\MakerController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\ApplianceController;
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -45,4 +47,5 @@ Route::resource('company', CompanyController::class);
 
 Route::resource('shop', ShopController::class);
 
+Route::resource('appliance', ApplianceController::class);
 require __DIR__.'/auth.php';

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Company;
+use App\Models\Appliance;
 
 class Shop extends Model
 {
@@ -23,5 +24,9 @@ class Shop extends Model
 
     public function company() {
         return $this->belongsTo(Company::class);
+    }
+
+    public function appliance() {
+        return $this->hasMany(Appliance::class);
     }
 }
