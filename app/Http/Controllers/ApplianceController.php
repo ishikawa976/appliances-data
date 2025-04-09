@@ -16,7 +16,7 @@ class ApplianceController extends Controller
      */
     public function index()
     {
-        $appliances = Appliance::all();
+        $appliances = Appliance::with('shops')->get();
         return Inertia::render('appliance/index',['appliances' => $appliances]);
     }
 

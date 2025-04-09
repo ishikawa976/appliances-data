@@ -17,7 +17,7 @@ class Appliance extends Model
     protected $appends = [
         'category',
         'maker_name',
-        'shop_name'
+        'status'
     ];
 
     protected function getCategoryAttribute() {
@@ -30,20 +30,19 @@ class Appliance extends Model
         return $maker->maker_name;
     }
 
-    protected function getShopNameAttribute() {
-        $shop = Shop::find($this->shop_id);
-        return $shop->full_name;
+    protected function getStatusAttribute() {
+        return $this->disposal ? '廃棄済' : '所有' ;
     }
 
-    public function category() {
+    public function categorys() {
         return $this->belongsTo(Category::class);
     }
 
-    public function maker() {
+    public function makers() {
         return $this->belongsTo(Maker::class);
     }
 
-    public function shop() {
+    public function shops() {
         return $this->belongsTo(Shop::class);
     }
 };

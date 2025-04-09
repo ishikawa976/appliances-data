@@ -5,9 +5,10 @@ import TextInput from "@/Components/TextInput.vue";
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import InputError from '@/Components/InputError.vue';
 import { Head, useForm } from '@inertiajs/vue3';
-import { ref } from "vue";
+import { computed } from "vue";
 
-const isDisposal = ref('所蔵');
+const status = computed(() => form.disposal ? '廃棄済' : '所有' );
+
 const props = defineProps({
        categories: Array,
        makers: Array,
@@ -30,7 +31,7 @@ const form = useForm({
 });
 
     const createAppliance = () => {
-        form.post(route("appliance.store"));
+        //form.post(route("appliance.store"));
         console.log(form)
     };
 </script>
@@ -46,7 +47,8 @@ const form = useForm({
             </h2>
         </template>
         <div class="bg-white mx-48 my-6 px-60 py-6">
-             <form @submit.prevent="createAppliance">
+             <form @submit.prevent="createAppliance" enctype=”multipart/form-data”>
+                <div class="flex flex-col gap-8">
                 <div>
                     <InputLabel for="name" value="品名" />
                     <TextInput
@@ -58,7 +60,7 @@ const form = useForm({
                 </div>
                 <div>
                     <InputLabel for="category_id" value="カテゴリー" />
-                    <select v-model="form.category_id" class="w-full">
+                    <select v-model="form.category_id" class="w-1/2">
                         <option v-for="category in categories" :value = "category.id">{{ category.name }}</option>
                     </select>
                 </div>
@@ -86,12 +88,12 @@ const form = useForm({
                         id="manufacture_year" 
                         type="number"
                         v-model="form.manufacture_year"
-                        class="w-full"
+                        class="w-1/2"
                     />
                 </div>
                 <div>
                     <InputLabel for="maker_id" value="メーカー" />
-                    <select v-model="form.maker_id" class="w-full">
+                    <select v-model="form.maker_id" class="w-1/2">
                         <option v-for="maker in makers" :value = "maker.id">{{ maker.name }}</option>
                     </select>
                 </div>
@@ -104,12 +106,13 @@ const form = useForm({
                         class="w-full"
                     />
                 </div>
+                <div class="grid grid-cols-2 gap-4 w-full">
                 <div>
                     <InputLabel for="purchase_date" value="購入日" />
                     <TextInput
                         id="purchase_date" 
                         type="date"
-                        v-model="purchase_date"
+                        v-model="form.purchase_date"
                         class="w-full"
                     />
                 </div>
@@ -119,15 +122,43 @@ const form = useForm({
                         <option v-for="shop in shops" :value = "shop.id">{{ shop.full_name }}</option>
                     </select>
                 </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 w-full">
                 <div>
                     <InputLabel for="disposal" value="廃棄" />
                     <label>
                     <input
-                        v-model="disposal"
+                        v-model="form.disposal"
                         type="checkbox"
+                        class="peer sr-only"
                     />
-                         {{ isDisposal }}
+                    <span
+                        class="block w-[2em] cursor-pointer bg-gray-500 rounded-full
+                        p-[1px] after:block after:h-[1em] after:w-[1em] after:rounded-full
+                        after:bg-white after:transition peer-checked:bg-blue-500
+                        peer-checked:after:translate-x-[calc(100%-2px)]"
+                    >
+                    </span>
+                         {{ status }}
                     </label>
+                </div>
+                <div>
+                    <InputLabel for="disposal_date" value="廃棄日" />
+                    <TextInput
+                        id="disposal_date" 
+                        type="date"
+                        v-model="form.disposal_date"
+                        class="w-full"
+                    />
+                </div>
+                </div>
+                <div>
+                    <InputLabel for="manual_pdf" value="取扱説明書" />
+                    <input type="file" id="manual_pdf" :v-model="form.manual_pdf">
+                </div>
+                <div class="mt-8">
+                    <PrimaryButton> 登録 </PrimaryButton>
+                </div>
                 </div>
              </form>
         </div>
