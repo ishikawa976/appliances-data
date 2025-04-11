@@ -54,15 +54,14 @@ class ApplianceController extends Controller
             'shop_id' => '',
             'disposal' => 'required',
             'disposal_date' => '',
-            'manual_pdf' => '',
         ]);
 
         
-        if($request('manual_pdf')){
+        
             //$filename = $request->file('manual_pdf')->getClientOriginalName();
-            $filename = $request->file('manual_pdf')->$request('item_number').'.pdf';
-            $request->file('manual_pdf')->storeAs('manual', $filename, 'public');
-        }
+            //$filename = $request->file('manual_pdf')->$request('item_number').'.pdf';
+            //$request->file('manual_pdf')->storeAs('manual', $filename, 'public');
+        
 
         $appliance = Appliance::create($validated);
 
@@ -81,13 +80,13 @@ class ApplianceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Appliance $appliance)
+    public function edit($id)
     {
         $appliance = Appliance::find($id);
         $categories = Category::orderby('name', 'asc')->get();
-        $makers = Maker::orderby('maker_name', 'asc')->get();
-        $shops = Shop::orderby('full_name', 'asc')->get();
-        return Inertia::render('appliance/edit', [
+        $makers = Maker::orderby('name', 'asc')->get();
+        $shops = Shop::orderby('shop_name', 'asc')->get();
+        return Inertia::render('Appliance/edit', [
             'appliance'=>$appliance,
             'categories'=>$categories,
             'makers'=>$makers,
@@ -111,13 +110,13 @@ class ApplianceController extends Controller
             'shop_id' => '',
             'disposal' => 'required',
             'disposal_date' => '',
-            'manual_pdf' => '',
+            //'manual_pdf' => '',
         ]);
 
-        if($request('manual_pdf')) {
+        /*if($request('manual_pdf')) {
             $filename = $request->file('manual_pdf')->$request('item_number').'.pdf';
             $request->file('manual_pdf')->storeAs('manual', $filename, 'public');
-        }
+        }*/
 
         $appliance->Appliance::update($validated);
 

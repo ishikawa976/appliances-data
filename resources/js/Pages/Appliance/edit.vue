@@ -10,28 +10,30 @@ import { computed } from "vue";
 const status = computed(() => form.disposal ? '廃棄済' : '所有' );
 
 const props = defineProps({
-       categories: Array,
-       makers: Array,
-       shops: Array
+    appliance: Object,
+    categories: Array,
+    makers: Array,
+    shops: Array,
 });
 
 const form = useForm({
-    name: "",
-    category_id: "",
-    item_number: "",
-    serial_number: "",
-    manufacture_year: "",
-    maker_id: "",
-    maker_url: "",
-    purchase_date: "",
-    shop_id: "",
-    disposal: false,
-    disposal_date: "",
-    manual_pdf: "",
+    name: props.appliance.name,
+    category_id: props.appliance.category_id,
+    item_number: props.appliance.item_number,
+    serial_number: props.appliance.serial_number,
+    manufacture_year: props.appliance.manufacture_year,
+    maker_id: props.appliance.maker_id,
+    maker_url: props.appliance.maker_url,
+    purchase_date: props.appliance.purchase_date,
+    shop_id: props.appliance.shop_id,
+    disposal: props.appliance.disposal,
+    disposal_date: props.appliance.disposal_date,
+    manual_pdf: props.appliance.manual_pdf,
+
 });
 
-    const createAppliance = () => {
-        form.post(route("appliance.store"));
+    const editAppliance = () => {
+        form.patch(route("appliance.update", props.appliance.id));
         console.log(form)
     };
 </script>
@@ -43,11 +45,11 @@ const form = useForm({
             <h2
                 class="text-xl font-semibold leading-tight text-gray-800"
             >
-                家電データ登録
+                家電データ編集
             </h2>
         </template>
         <div class="bg-white mx-48 my-6 px-60 py-6">
-             <form @submit.prevent="createAppliance" enctype=”multipart/form-data”>
+             <form @submit.prevent="editAppliance" enctype=”multipart/form-data”>
                 <div class="flex flex-col gap-8">
                 <div>
                     <InputLabel for="name" value="品名" />
