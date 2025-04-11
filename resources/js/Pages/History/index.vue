@@ -27,18 +27,24 @@
             </a>
         </template>
             <div class="bg-white mx-24 my-12 px-12 py-6">
-                <div v-for="history in histories" :key=history.id>
-                    <div class="flex flex-col p-2">
-                        <div class="flex flex-row gap-24">
-                            <div>{{ todaystring(history.created_at) }}</div>
-                            <div>
+                <table>
+                    <thead>
+                        <th class="w-2/7"></th>
+                        <th class="w-5/7"></th>
+                    </thead>
+                    <tbody class="m-2 p-2">
+                        <tr v-for="history in histories" :key=history.id class="flex gap-6">
+                            <td class="py-4">
+                                {{ todaystring(history.created_at) }}
+                            </td>
+                            <td class="py-4">
                                 <a :href="route('history.show', history.id)" class="text-blue-600">
                                      {{ history.title }}
                                 </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
     </AuthenticatedLayout>
 </template>
