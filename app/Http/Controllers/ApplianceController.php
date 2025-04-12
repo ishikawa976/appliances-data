@@ -16,8 +16,8 @@ class ApplianceController extends Controller
      */
     public function index()
     {
-        $appliances = Appliance::with('shops')->get();
-        return Inertia::render('appliance/index',['appliances' => $appliances]);
+        $appliances = Appliance::with('shop')->get();
+        return Inertia::render('Appliance/index',['appliances' => $appliances]);
     }
 
     /**
@@ -109,8 +109,7 @@ class ApplianceController extends Controller
             'purchase_date' => '',
             'shop_id' => '',
             'disposal' => 'required',
-            'disposal_date' => '',
-            //'manual_pdf' => '',
+            'disposal_date' => ''
         ]);
 
         /*if($request('manual_pdf')) {
@@ -118,7 +117,7 @@ class ApplianceController extends Controller
             $request->file('manual_pdf')->storeAs('manual', $filename, 'public');
         }*/
 
-        $appliance->Appliance::update($validated);
+        $appliance->update($validated);
 
         return redirect()->route('appliance.index');
     }
