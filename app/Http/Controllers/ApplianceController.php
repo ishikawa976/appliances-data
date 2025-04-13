@@ -71,10 +71,10 @@ class ApplianceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Appliance $appliance)
+    public function show($id)
     {
         $appliance = Appliance::find($id);
-        return Inertia::render('appliance/show',['appliance' => $appliance]);
+        return Inertia::render('Appliance/show',['appliance' => $appliance]);
     }
 
     /**

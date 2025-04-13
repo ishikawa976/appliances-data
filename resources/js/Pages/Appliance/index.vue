@@ -15,7 +15,7 @@ const props = defineProps({
                     家電一覧
                 </h2>
             </template>
-            <div  class="bg-white mx-16 my-16 p-24">
+            <div  class="bg-white mx-8 my-8 p-6">
                 <table class="border-collapse border border-slate-500 w-full">
                     <thead>
                         <tr>
@@ -34,7 +34,11 @@ const props = defineProps({
                     </thead>
                     <tbody>
                         <tr v-for="appliance in appliances">
-                            <td class="border border-slate-700">{{ appliance.name }}</td>
+                            <td class="border border-slate-700">
+                                <Link :href="route('appliance.edit', appliance.id)">
+                                    {{ appliance.name }}
+                                </LinK>
+                            </td>
                             <td class="border border-slate-700">{{ appliance.category }}</td>
                             <td class="border border-slate-700">{{ appliance.item_number }}</td>
                             <td class="border border-slate-700">{{ appliance.serial_number }}</td>
@@ -45,11 +49,11 @@ const props = defineProps({
                                     登録済
                                 </a>
                             </td>
-                            <td v-else>
+                            <td v-else class="border border-slate-700 px-4 py-2">
                                 未登録
                             </td>
                             <td class="border border-slate-700 px-4 py-2">{{ appliance.purchase_date }}</td>
-                            <td class="border border-slate-700 px-4 py-2">{{ appliance.shop_name }}</td>
+                            <td class="border border-slate-700 px-4 py-2"><!--{{ appliance.shop.name }}--></td>
                             <td class="border border-slate-700 px-4 py-2">{{ appliance.status }}</td>
                             <td class="border border-slate-700 px-4 py-2">{{ appliance.disposal_date }}</td>
                         </tr>
