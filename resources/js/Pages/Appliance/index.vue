@@ -34,28 +34,28 @@ const props = defineProps({
                     </thead>
                     <tbody>
                         <tr v-for="appliance in appliances">
-                            <td class="border border-slate-700">
-                                <Link :href="route('appliance.edit', appliance.id)">
+                            <td class="border border-slate-700 px-4 py-2">
+                                <Link :href="route('appliance.show', appliance.id)">
                                     {{ appliance.name }}
                                 </LinK>
                             </td>
-                            <td class="border border-slate-700">{{ appliance.category }}</td>
-                            <td class="border border-slate-700">{{ appliance.item_number }}</td>
-                            <td class="border border-slate-700">{{ appliance.serial_number }}</td>
-                            <td class="border border-slate-700 px-4 py-2">{{ appliance.manufacture_year }}</td>
+                            <td class="border border-slate-700 px-4 py-2">{{ appliance.category }}</td>
+                            <td class="border border-slate-700 px-4 py-2">{{ appliance.item_number }}</td>
+                            <td class="border border-slate-700 px-4 py-2">{{ appliance.serial_number }}</td>
+                            <td class="border border-slate-700 sticky text-center">{{ appliance.manufacture_year }}</td>
                             <td class="border border-slate-700 px-4 py-2">{{ appliance.maker_name }}</td>
-                            <td v-if="appliance.maker_url!==null" class="border border-slate-700 px-4 py-2">
+                            <td v-if="appliance.maker_url!==null" class="border border-slate-700 sticky text-center">
                                 <a :href = "appliance.maker_url" class="hover:border border-b-blue-700">
                                     登録済
                                 </a>
                             </td>
-                            <td v-else class="border border-slate-700 px-4 py-2">
+                            <td v-else class="border border-slate-700 sticky text-center">
                                 未登録
                             </td>
-                            <td class="border border-slate-700 px-4 py-2">{{ appliance.purchase_date }}</td>
-                            <td class="border border-slate-700 px-4 py-2"><!--{{ appliance.shop.name }}--></td>
-                            <td class="border border-slate-700 px-4 py-2">{{ appliance.status }}</td>
-                            <td class="border border-slate-700 px-4 py-2">{{ appliance.disposal_date }}</td>
+                            <td class="border border-slate-700 sticky text-center">{{ appliance.purchase_date }}</td>
+                            <td class="border border-slate-700 sticky text-center"><!--{{ appliance.shop.full_name }}--></td>
+                            <td class="border border-slate-700 sticky text-center">{{ appliance.status }}</td>
+                            <td class="border border-slate-700 sticky text-center">{{ appliance.disposal_date }}</td>
                         </tr>
                     </tbody>
                 </table>
