@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\Category;
 use App\Models\Maker;
 use App\Models\Shop;
+use App\Models\Company;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Appliance extends Model
 {
@@ -17,8 +19,8 @@ class Appliance extends Model
     protected $appends = [
         'category',
         'maker_name',
-        //'shop_name',
-        //'shop_url',
+        'shop_name',
+        'shop_url',
         'status'
     ];
 
@@ -36,31 +38,46 @@ class Appliance extends Model
         return $this->disposal ? '廃棄済' : '所有' ;
     }
 
-     /*protected function getShopNameAttribute() {
-        $shop = Shop::find($this->shop_id);
-        $name = $shop->full_name;
-        $status = $shop->status;
-        if($status==='閉店'){
-            return $name.'('.$status.')';
+     protected function getShopNameAttribute() {
+        if($this->shop_id !== null) {
+            $shop = Shop::find($this->shop_id);
+            //$shopName = $shop->shop_name;
+            $status = $shop->status;
+            $company = Company::find($shop->company_id);
+            //$companyName = $company->name;
+            $fullName = $company->name.' '. $shop->shop_name;
+
+            if($status==='閉店'){
+                return  $fullName.'('.$status.')';
+            } else {
+                return  $fullName;
+            }
         } else {
-            return $name;
+            return "";
         }
-    }*/
+    }
     
-    /* protected function getShopUrlAttribute() {
+    protected function getShopUrlAttribute() {
+        if($this->shop_id !== null) {
         $shop = Shop::find($this->shop_id);
         return $shop->url;
-     }*/
+        } else {
+            return "";
+        }
+     }
 
-    public function category() {
+    public function category(): BelongsTo  
+    {
         return $this->belongsTo(Category::class);
     }
 
-    public function maker() {
+    public function maker(): BelongsTo 
+    {
         return $this->belongsTo(Maker::class);
     }
 
-    public function shop() {
+    public function shop(): BelongsTo
+    {
         return $this->belongsTo(Shop::class);
     }
 };

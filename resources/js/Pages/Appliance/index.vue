@@ -37,7 +37,7 @@ const props = defineProps({
                     </thead>
                     <tbody>
                         <tr v-for="appliance in appliances">
-                            <td class="border border-slate-700 px-4 py-2">
+                            <td class="border border-slate-700 px-4 py-2 text-blue-700">
                                 <Link :href="route('appliance.show', appliance.id)">
                                     {{ appliance.name }}
                                 </LinK>
@@ -47,7 +47,7 @@ const props = defineProps({
                             <td class="border border-slate-700 px-4 py-2">{{ appliance.serial_number }}</td>
                             <td class="border border-slate-700 sticky text-center">{{ appliance.manufacture_year }}</td>
                             <td class="border border-slate-700 px-4 py-2">{{ appliance.maker_name }}</td>
-                            <td v-if="appliance.maker_url!==null" class="border border-slate-700 sticky text-center">
+                            <td v-if="appliance.maker_url!==null" class="border border-slate-700 sticky text-center text-blue-700">
                                 <a :href = "appliance.maker_url" class="hover:border border-b-blue-700">
                                     登録済
                                 </a>
@@ -56,7 +56,14 @@ const props = defineProps({
                                 未登録
                             </td>
                             <td class="border border-slate-700 sticky text-center">{{ appliance.purchase_date }}</td>
-                            <td class="border border-slate-700 sticky text-center"><!--{{ appliance.shop.full_name }}--></td>
+                            <td v-if="appliance.shop_url!==null" class="border border-slate-700 sticky text-center text-blue-700">
+                                <a :href = "appliance.shop_url" class="hover:border border-b-blue-700">
+                                    {{ appliance.shop_name }}
+                                </a>
+                            </td>
+                            <td v-else class="border border-slate-700 sticky text-center">
+                                {{ appliance.shop_name }}
+                            </td>
                             <td class="border border-slate-700 sticky text-center">{{ appliance.status }}</td>
                             <td class="border border-slate-700 sticky text-center">{{ appliance.disposal_date }}</td>
                         </tr>

@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\Appliance;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+//use App\Models\Appliance;
 
 class Maker extends Model
 {
@@ -14,7 +15,8 @@ class Maker extends Model
         'name',
     ];
 
-    public function appliance() {
+    public function appliance(): HasMany
+    {
         return $this->hasMany(Appliance::class);
     }
 }
