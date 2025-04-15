@@ -26,7 +26,7 @@ class Shop extends Model
         return $this->belongsTo(Company::class);
     }
 
-    public function appliance() {
+    public function appliances() {
         return $this->hasMany(Appliance::class);
     }
 }

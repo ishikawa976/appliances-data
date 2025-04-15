@@ -42,6 +42,14 @@ const showingNavigationDropdown = ref(false);
                             </div>
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink
+                                    :href="route('appliance.index')"
+                                    :active="route().current('appliance.index')"
+                                >
+                                   家電データ
+                                </NavLink>
+                            </div>
+                            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <NavLink
                                     :href="route('history.index')"
                                     :active="route().current('history.index')"
                                 >

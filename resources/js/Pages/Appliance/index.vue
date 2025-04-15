@@ -14,6 +14,9 @@ const props = defineProps({
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                     家電一覧
                 </h2>
+                <a :href="route('appliance.create')">
+                    新規登録
+                </a>
             </template>
             <div  class="bg-white mx-8 my-8 p-6">
                 <table class="border-collapse border border-slate-500 w-full">

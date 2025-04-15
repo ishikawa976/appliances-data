@@ -48,4 +48,5 @@ Route::resource('company', CompanyController::class);
 Route::resource('shop', ShopController::class);
 
 Route::resource('appliance', ApplianceController::class);
+
 require __DIR__.'/auth.php';
