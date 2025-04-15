@@ -77,6 +77,10 @@
                         <td class="border border-slate-700 px-5 py-1">現状</td>
                         <td class="border border-slate-700 px-5 py-1">{{ appliance.status }}</td>
                     </tr>
+                    <tr v-if="appliance.disposal===true" class="px-5">
+                        <td class="border border-slate-700 px-5 py-1">廃棄日</td>
+                        <td class="border border-slate-700 px-5 py-1">{{ appliance.disposal_date }}</td>
+                    </tr>
                 </table>
             </div>
         </div>
