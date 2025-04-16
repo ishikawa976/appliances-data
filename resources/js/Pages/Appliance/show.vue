@@ -1,6 +1,7 @@
 <script setup>
     import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
     import PrimaryButton from "@/Components/PrimaryButton.vue";
+    import DeleteButton from '@/Components/DeleteButton.vue';
     import { Head, Link, useForm } from '@inertiajs/vue3';
 
 
@@ -10,7 +11,7 @@
 
 
     const deleteAppliance = (id) => {
-        form.delete(route("history.destroy", id));
+        form.delete(route("appliance.destroy", id));
     };
 
     const daystring = (date) => {
@@ -36,7 +37,12 @@
                    {{ appliance.name }}
                 </div>
             </div>
-            <div>
+            <div v-if="appliance.maker_url!==null">
+                <a :href = "appliance.maker_url" class="text-blue-700 hover:border border-b-blue-700">
+                    メーカーURLの情報
+                </a>
+            </div>
+            <div class="mt-4">
                 <table class="border-collapse border border-slate-500 w-full">
                     <tr class="px-5">
                         <td class="border border-slate-700 px-5 py-1">カテゴリー</td>
@@ -82,6 +88,14 @@
                         <td class="border border-slate-700 px-5 py-1">{{ appliance.disposal_date }}</td>
                     </tr>
                 </table>
+            </div>
+            <div class="mt-8 flex flex-row gap-4">
+                <Link :href="route('appliance.edit', appliance.id)">
+                    <PrimaryButton type="button">更新</PrimaryButton>
+                </Link>
+                <DeleteButton type="button"@click="deleteAppliance(appliance.id)">
+                    削除
+                </DeleteButton>
             </div>
         </div>
     </AuthenticatedLayout>
