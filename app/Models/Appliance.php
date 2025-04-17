@@ -8,8 +8,9 @@ use App\Models\Category;
 use App\Models\Maker;
 use App\Models\Shop;
 use App\Models\Company;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
+use App\Models\Record;
 class Appliance extends Model
 {
     protected $guarded = [
@@ -80,4 +81,10 @@ class Appliance extends Model
     {
         return $this->belongsTo(Shop::class);
     }
+
+    public function records(): HasMany  
+    {
+        return $this->hasMany(Record::class);
+    }
+
 };

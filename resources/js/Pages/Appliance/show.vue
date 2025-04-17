@@ -2,6 +2,7 @@
     import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
     import PrimaryButton from "@/Components/PrimaryButton.vue";
     import DeleteButton from '@/Components/DeleteButton.vue';
+    import RecordCleate from '@/Pages/Record/create.vue';
     import { Head, Link, useForm } from '@inertiajs/vue3';
 
 
@@ -25,7 +26,7 @@
 
 <template>
     <AuthenticatedLayout>
-        <Head title="Histrory" />
+        <Head title="Appliance" />
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 家電情報
@@ -96,6 +97,9 @@
                 <DeleteButton type="button"@click="deleteAppliance(appliance.id)">
                     削除
                 </DeleteButton>
+            </div>
+            <div>
+                <RecordCleate appliance="props.appliance"/>
             </div>
         </div>
     </AuthenticatedLayout>
