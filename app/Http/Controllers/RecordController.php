@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Appliance;
 use Inertia\Inertia;
 
+
 class RecordController extends Controller
 {
     /**
@@ -33,11 +34,12 @@ class RecordController extends Controller
        
         $validated = $request->validate([
             'appliance_id' => 'required',
+            'record_date' => 'required',
             'title' => 'required',
             'note' => 'required',
         ]);
 
-         $record = Record::create($validated);
+         return $record = Record::create($validated);
     
     }
 

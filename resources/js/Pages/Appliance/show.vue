@@ -6,7 +6,7 @@
     import { Head, Link, useForm } from '@inertiajs/vue3';
 
 
-    defineProps({
+    const props = defineProps({
         appliance: Object,
     });
 

@@ -10,11 +10,12 @@ import { computed } from "vue";
 
 
 const props = defineProps({
-       appliance: Array,
+       appliance: Object,
 });
 
 const form = useForm({
     appliance_id: props.appliance.id,
+    record_date: "",
     title: "",
     note: "",
 });
@@ -28,7 +29,16 @@ const form = useForm({
 <template>
     <div class="bg-white mx-6 my-6 px-36 py-6">
         <form @submit.prevent="createRecord">
-            <div>
+            <div class="mt-8">
+                <InputLabel for="record_date" value="日付" />
+                <TextInput
+                    id="record_date" 
+                    type="date"
+                    v-model="form.record_date"
+                    class="w-1/2"
+                />
+            </div>
+            <div class="mt-8">
                 <InputLabel for="title" value="タイトル" />
 
                 <TextInput 
