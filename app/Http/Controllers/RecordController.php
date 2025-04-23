@@ -39,8 +39,9 @@ class RecordController extends Controller
             'note' => 'required',
         ]);
 
-         return $record = Record::create($validated);
-    
+         $record = Record::create($validated);
+         
+        return redirect()->route('appliance.index');
     }
 
     /**

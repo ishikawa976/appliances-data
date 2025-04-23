@@ -11,6 +11,7 @@ use App\Http\Controllers\MakerController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ApplianceController;
+use App\Http\Controllers\RecordController;
 
 
 Route::get('/', function () {
@@ -48,5 +49,7 @@ Route::resource('company', CompanyController::class);
 Route::resource('shop', ShopController::class);
 
 Route::resource('appliance', ApplianceController::class);
+
+Route::resource('record', RecordController::class);
 
 require __DIR__.'/auth.php';

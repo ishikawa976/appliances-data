@@ -19,8 +19,4 @@ class Record extends Model
         return $this->belongsTo(Appliance::class);
     }
 
-    public function records(): HasMany  
-    {
-        return $this->hasMany(Appliance::class);
-    }
-}
+};

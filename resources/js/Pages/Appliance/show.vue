@@ -99,7 +99,7 @@
                 </DeleteButton>
             </div>
             <div>
-                <RecordCleate appliance="props.appliance"/>
+                <RecordCleate :appliance="props.appliance"/>
             </div>
         </div>
     </AuthenticatedLayout>
