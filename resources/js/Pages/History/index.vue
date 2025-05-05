@@ -1,8 +1,8 @@
 
 <script setup>
     import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-    import PrimaryButton from "@/Components/PrimaryButton.vue";
-    import { useForm } from '@inertiajs/vue3';
+    //import PrimaryButton from "@/Components/PrimaryButton.vue";
+    //import { useForm } from '@inertiajs/vue3';
 
     defineProps({
         histories: Array,

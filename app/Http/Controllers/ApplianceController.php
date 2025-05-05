@@ -16,7 +16,7 @@ class ApplianceController extends Controller
      */
     public function index()
     {
-        $appliances = Appliance::with('shop')->get();
+        $appliances = Appliance::all();
         return Inertia::render('Appliance/index',['appliances' => $appliances]);
     }
 
@@ -73,7 +73,8 @@ class ApplianceController extends Controller
      */
     public function show($id)
     {
-        $appliance = Appliance::find($id);
+        $appliance = Appliance::with('records')->find($id);
+        //dd($appliance);
         return Inertia::render('Appliance/show',['appliance' => $appliance]);
     }
 

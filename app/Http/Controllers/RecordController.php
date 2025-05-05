@@ -47,9 +47,11 @@ class RecordController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Record $record)
+    public function show($id)
     {
-        //
+        $record = Record::with('appliance')->find($id);
+        //dd($record);
+        return Inertia::render('Record/show',['record' => $record]);
     }
 
     /**

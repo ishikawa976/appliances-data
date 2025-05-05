@@ -3,11 +3,13 @@
     import PrimaryButton from "@/Components/PrimaryButton.vue";
     import DeleteButton from '@/Components/DeleteButton.vue';
     import RecordCleate from '@/Pages/Record/create.vue';
+    import RecordIndex from '@/Pages/Record/index.vue';
     import { Head, Link, useForm } from '@inertiajs/vue3';
 
 
     const props = defineProps({
         appliance: Object,
+        //records: Array,
     });
 
 
@@ -100,6 +102,9 @@
             </div>
             <div>
                 <RecordCleate :appliance="props.appliance"/>
+            </div>
+            <div>
+                <RecordIndex :records="props.appliance.records" />
             </div>
         </div>
     </AuthenticatedLayout>
