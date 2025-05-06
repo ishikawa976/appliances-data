@@ -1,33 +1,42 @@
 <script setup>
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import InputError from '@/Components/InputError.vue';
-import { useForm } from '@inertiajs/vue3';
+import { Head, useForm } from '@inertiajs/vue3';
+
+
 
 
 const props = defineProps({
-       appliance: Object,
+       record: Object,
 });
 
 const form = useForm({
-    appliance_id: "",
-    record_date: "",
-    title: "",
-    note: "",
+    appliance_id: props.record.appliance.id,
+    record_date: props.record.record_date,
+    title: props.record.title,
+    note: props.record.note,
 });
 
-    const createRecord = () => {
-        form.appliance_id = props.appliance.id;
-        form.post(route("record.store"));
+    const editRecord = () => {
+        form.post(route("record.update"));
         console.log(form)
     };
 </script>
 
 <template>
+    <AuthenticatedLayout>
+    <Head title="Record" />
+    <template #header>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ props.record.appliance.name }}（{{ props.record.appliance.item_number}}）
+        </h2>
+    </template>
+   
     <div class="bg-white mx-6 my-6 px-36 py-6">
-        <form @submit.prevent="createRecord">
-            記録登録
+        <form @submit.prevent="editRecord">
             <div class="mt-8">
                 <InputLabel for="record_date" value="日付" />
                 <TextInput
@@ -53,10 +62,10 @@ const form = useForm({
                 <InputLabel for="note" value="内容" />
                 <textarea v-model="form.note" class="w-full h-40"></textarea>
             </div>
-            <InputError class="mt-2" :message="form.errors.name" />
             <div class="mt-8">
-                <PrimaryButton> 登録 </PrimaryButton>
+                <PrimaryButton> 更新 </PrimaryButton>
             </div>
         </form>
     </div>
+    </AuthenticatedLayout>
 </template>

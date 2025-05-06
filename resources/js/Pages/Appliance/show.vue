@@ -4,12 +4,11 @@
     import DeleteButton from '@/Components/DeleteButton.vue';
     import RecordCleate from '@/Pages/Record/create.vue';
     import RecordIndex from '@/Pages/Record/index.vue';
-    import { Head, Link, useForm } from '@inertiajs/vue3';
+    import { Head, Link } from '@inertiajs/vue3';
 
 
     const props = defineProps({
         appliance: Object,
-        //records: Array,
     });
 
 
@@ -23,7 +22,9 @@
         let month = (datestamp.getMonth() + 1);
         let day = datestamp.getDate();
         return year + '年' + month  + '月' + day + '日'
-};
+    };
+
+    const recordsLength = props.appliance.records.length;
 </script>
 
 <template>
@@ -103,7 +104,7 @@
             <div>
                 <RecordCleate :appliance="props.appliance"/>
             </div>
-            <div>
+            <div v-if="recordsLength !== 0">
                 <RecordIndex :records="props.appliance.records" />
             </div>
         </div>

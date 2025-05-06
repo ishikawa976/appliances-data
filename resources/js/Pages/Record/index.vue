@@ -13,7 +13,7 @@
 </script>
 
 <template>
-    <div class="bg-white mx-24 my-12 px-12 py-6">
+    <div class="border border-black-800 m-12 p-6 h-40 overflow-y-scroll">
         <table>
             <thead>
                 <th class="w-2/7"></th>

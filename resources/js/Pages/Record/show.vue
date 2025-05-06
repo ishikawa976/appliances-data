@@ -1,6 +1,7 @@
 <script setup>
     import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
     import PrimaryButton from "@/Components/PrimaryButton.vue";
+    import DeleteButton from '@/Components/DeleteButton.vue';
     import { Head, Link, useForm } from '@inertiajs/vue3';
 
     const form = useForm({});
@@ -49,9 +50,9 @@
                 <Link :href="route('record.edit', record.id)">
                     <PrimaryButton type="button">更新</PrimaryButton>
                 </Link>
-                <PrimaryButton type="button"@click="deleteRecord(record.id)">
+                <DeleteButton type="button"@click="deleteRecord(record.id)">
                     削除
-                </PrimaryButton>
+                </DeleteButton>
             </div>
         </div>
     </AuthenticatedLayout>

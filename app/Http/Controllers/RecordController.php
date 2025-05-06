@@ -57,9 +57,10 @@ class RecordController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Record $record)
+    public function edit($id)
     {
-        //
+        $record = Record::with('appliance')->find($id);
+        return Inertia::render('Record/edit',['record' => $record]);
     }
 
     /**
@@ -69,11 +70,13 @@ class RecordController extends Controller
     {
         $validated = $request->validate([
             'appliance_id' => 'required',
+            'record_date' => 'required',
             'title' => 'required',
             'note' => 'required',
         ]);
 
           $record->update($validated);
+          return redirect()->route('appliance.index');
     }
 
     /**
