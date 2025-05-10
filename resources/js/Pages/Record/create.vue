@@ -62,7 +62,7 @@ const form = useForm({
                 <InputLabel for="note" value="内容" />
                 <textarea v-model="form.note" class="w-full h-40"></textarea>
             </div>
-            <div class="mt-8 flex flex-row gap-4">
+            <div class="mt-8 flex flex-row gap-12">
                 <PrimaryButton>
                     登録
                 </PrimaryButton>
