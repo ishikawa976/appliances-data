@@ -2,10 +2,22 @@
     import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
     import PrimaryButton from "@/Components/PrimaryButton.vue";
     import DeleteButton from '@/Components/DeleteButton.vue';
+    import BlueButton from '@/Components/BlueButton.vue';
     import RecordCleate from '@/Pages/Record/create.vue';
     import RecordIndex from '@/Pages/Record/index.vue';
     import { Head, Link } from '@inertiajs/vue3';
+    import { ref } from 'vue';
 
+    const showContent = ref(false);
+
+    const openModal = () => {
+        console.log('click');
+        showContent.value = true;
+      };
+
+      const closeModal = () => {
+        showContent.value = false;
+      };
 
     const props = defineProps({
         appliance: Object,
@@ -26,7 +38,26 @@
 
     const recordsLength = props.appliance.records.length;
 </script>
+<style>
+    #overlay{
+        /*　要素を重ねた時の順番　*/
+        z-index:1;
 
+        /*　画面全体を覆う設定　*/
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background-color:rgba(0,0,0,0.5);
+
+        /*　画面の中央に要素を表示させる設定　*/
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+</style>
 <template>
     <AuthenticatedLayout>
         <Head title="Appliance" />
@@ -100,9 +131,12 @@
                 <DeleteButton type="button"@click="deleteAppliance(appliance.id)">
                     削除
                 </DeleteButton>
+                <BlueButton v-on:click="openModal">
+                    情報登録
+                </BlueButton>
             </div>
-            <div>
-                <RecordCleate :appliance="props.appliance"/>
+            <div id="overlay" v-show="showContent">
+                <RecordCleate :appliance="props.appliance" v-on:clickEvent="closeModal" />
             </div>
             <div v-if="recordsLength !== 0">
                 <RecordIndex :records="props.appliance.records" />
