@@ -13,7 +13,8 @@
 </script>
 
 <template>
-    <div class="border border-black-800 m-12 p-6 h-40 overflow-y-scroll">
+<div class="mx-12 my-6 px-40 py-6 bg-white">
+    <div class="border border-black-900 m-6 p-4 h-30 overflow-y-scroll">
         <table>
             <thead>
                 <th class="w-2/7"></th>
@@ -33,4 +34,5 @@
              </tbody>
         </table>
     </div>
+</div>
 </template>

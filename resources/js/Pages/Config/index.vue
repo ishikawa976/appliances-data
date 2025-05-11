@@ -22,23 +22,29 @@ const props = defineProps({
                 各種登録
             </h2>
         </template>
-        <div>
-            <CategoryCreate />
+        <div id="category">
+            <div>
+                <CategoryCreate />
+            </div>
+            <div>
+                <CategoryEdit :categories=props.categories />
+            </div>
+         </div>
+         <div id="maker">
+             <div>
+                <MakerCreate />
+            </div>
+            <div>
+                <MakerEdit :makers=props.makers />
+            </div>
         </div>
-        <div>
-            <CategoryEdit :categories=props.categories />
-        </div>
-         <div>
-            <MakerCreate />
-        </div>
-        <div>
-            <MakerEdit :makers=props.makers />
-        </div>
-        <div>
-            <CompanyCreate />
-        </div>
-        <div>
-            <CompanyEdit :companies=props.companies />
+        <div id="company">
+            <div>
+                <CompanyCreate />
+            </div>
+            <div>
+                <CompanyEdit :companies=props.companies />
+            </div>
         </div>
     </AuthenticatedLayout>
 </template>

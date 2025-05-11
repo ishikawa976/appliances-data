@@ -32,9 +32,9 @@ const form = useForm({
 </script>
 
 <template>
-    <div class="bg-white mx-6 my-6 px-36 py-6 w-full">
+    <div class="bg-white mx-6 my-6 px-24 py-6 w-2/3">
         <form @submit.prevent="createRecord">
-            <div>
+            <div class="text-2xl">
                 {{ appliance.name }}（{{ appliance.item_number }}）の情報登録
             </div>
             <div class="mt-8">

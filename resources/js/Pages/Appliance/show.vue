@@ -66,7 +66,7 @@
                 家電情報
             </h2>
         </template>
-        <div class="bg-white mx-6 my-6 px-40 py-6">
+        <div class="bg-white mx-12 my-6 px-40 py-6">
             <div>
                 <div class="text-2xl">
                    {{ appliance.name }}
@@ -138,9 +138,9 @@
             <div id="overlay" v-show="showContent">
                 <RecordCleate :appliance="props.appliance" v-on:clickEvent="closeModal" />
             </div>
-            <div v-if="recordsLength !== 0">
-                <RecordIndex :records="props.appliance.records" />
-            </div>
+        </div>
+        <div v-if="recordsLength !== 0">
+            <RecordIndex :records="props.appliance.records" />
         </div>
     </AuthenticatedLayout>
 </template>
