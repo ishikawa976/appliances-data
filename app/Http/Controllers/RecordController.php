@@ -41,7 +41,7 @@ class RecordController extends Controller
 
          $record = Record::create($validated);
          
-        return redirect()->route('appliance.index');
+        return redirect()->route('appliance.show', $record->appliance_id);
     }
 
     /**
@@ -76,7 +76,7 @@ class RecordController extends Controller
         ]);
 
           $record->update($validated);
-          return redirect()->route('appliance.index');
+          return redirect()->route('appliance.show', $record->appliance_id);
     }
 
     /**
@@ -86,6 +86,6 @@ class RecordController extends Controller
     {
          $record->delete();
 
-        return redirect()->route('appliance.index');
+         return redirect()->route('appliance.show', $record->appliance_id);
     }
 }

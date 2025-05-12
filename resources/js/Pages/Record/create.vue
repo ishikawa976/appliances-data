@@ -63,7 +63,7 @@ const form = useForm({
                 <textarea v-model="form.note" class="w-full h-40"></textarea>
             </div>
             <div class="mt-8 flex flex-row gap-12">
-                <PrimaryButton>
+                <PrimaryButton @click="$emit('clickEvent')">
                     登録
                 </PrimaryButton>
                 <BlueButton @click="$emit('clickEvent')">

@@ -64,9 +64,11 @@ const form = useForm({
                         <option v-for="category in categories" :value = "category.id">{{ category.name }}</option>
                     </select>
                 </div>
-                <a :href="route('config.index')">
+                <div>
+                <a :href="localhost/config">
                     カテゴリー登録
                 </a>
+                </div>
                 <div>
                     <InputLabel for="item_number" value="品番" />
                     <TextInput
