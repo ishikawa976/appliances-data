@@ -73,7 +73,9 @@ class ApplianceController extends Controller
      */
     public function show($id)
     {
-        $appliance = Appliance::with('records')->find($id);
+        $appliance = Appliance::with(['records' => function($query){
+            $query->orderBy('record_date', 'desc');
+        }])->find($id);
         //dd($appliance);
         return Inertia::render('Appliance/show',['appliance' => $appliance]);
     }
