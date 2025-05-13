@@ -14,6 +14,7 @@ const props = defineProps({
        appliance: Object,
 });
 
+const emit = defineEmits(['from_child']); 
 const form = useForm({
     appliance_id: props.appliance.id,
     record_date: "",
@@ -23,20 +24,20 @@ const form = useForm({
 
     const createRecord = () => {
         form.post(route("record.store"));
+        clickEvent();
         console.log(form)
     };
 
-    /*const clickEvent = () => {
-      context.emit('from-child');
-    };*/
+    const clickEvent = () => {
+      emit('from_child');
+    };
 </script>
 
 <template>
     <div class="bg-white mx-6 my-6 px-24 py-6 w-2/3">
-        <form @submit.prevent="createRecord">
-            <div class="text-2xl">
-                {{ appliance.name }}（{{ appliance.item_number }}）の情報登録
-            </div>
+        <div class="text-2xl">
+            {{ appliance.name }}（{{ appliance.item_number }}）の情報登録
+        </div>
             <div class="mt-8">
                 <InputLabel for="record_date" value="日付" />
                 <TextInput
@@ -63,13 +64,12 @@ const form = useForm({
                 <textarea v-model="form.note" class="w-full h-40"></textarea>
             </div>
             <div class="mt-8 flex flex-row gap-12">
-                <PrimaryButton @click="$emit('clickEvent')">
+                <PrimaryButton v-on:click="createRecord">
                     登録
                 </PrimaryButton>
-                <BlueButton @click="$emit('clickEvent')">
+                <BlueButton v-on:click="clickEvent">
                     閉じる
                 </BlueButton>
             </div>
-        </form>
     </div>
 </template>

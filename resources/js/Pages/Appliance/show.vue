@@ -11,7 +11,6 @@
     const showContent = ref(false);
 
     const openModal = () => {
-        console.log('click');
         showContent.value = true;
       };
 
@@ -136,7 +135,7 @@
                 </BlueButton>
             </div>
             <div id="overlay" v-show="showContent">
-                <RecordCleate :appliance="props.appliance" v-on:clickEvent="closeModal" />
+                <RecordCleate :appliance="props.appliance" v-on:from_child="closeModal" />
             </div>
         </div>
         <div v-if="recordsLength !== 0">
