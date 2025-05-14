@@ -115,11 +115,14 @@ class ApplianceController extends Controller
             'disposal_date' => ''
         ]);
 
-        /*if($request('manual_pdf')) {
-            $filename = $request->file('manual_pdf')->$request('item_number').'.pdf';
+        if($request->manual_pdf) {
+            $filename = $request->file('manual_pdf')->getClientOriginalName();
             $request->file('manual_pdf')->storeAs('manual', $filename, 'public');
+        }
+        /*if ($manual = $request->file('manual_pdf')) {
+            $validated['manual_pdf'] = $manual->store('manual', $filename, 'public');
         }*/
-
+        dd($request->manual_pdf);
         $appliance->update($validated);
 
         return redirect()->route('appliance.index');

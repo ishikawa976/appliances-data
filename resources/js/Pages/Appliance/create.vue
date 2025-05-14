@@ -27,10 +27,12 @@ const form = useForm({
     shop_id: "",
     disposal: false,
     disposal_date: "",
+    manual: "",
     manual_pdf: "",
 });
 
     const createAppliance = () => {
+        form.manual_pdf = form.manual.name
         form.post(route("appliance.store"));
         console.log(form)
     };
@@ -58,6 +60,7 @@ const form = useForm({
                         class="w-full"
                     />
                 </div>
+                <InputError class="mt-2" :message="form.errors.name" />
                 <div>
                     <InputLabel for="category_id" value="カテゴリー" />
                     <select v-model="form.category_id" class="w-1/2">
@@ -159,7 +162,7 @@ const form = useForm({
                 </div>
                 <div>
                     <InputLabel for="manual_pdf" value="取扱説明書" />
-                    <input type="file" id="manual_pdf" @input="form.manual_pdf=$event.target.file[0]">
+                    <input type="file" id="manual" @input="form.manual=$event.target.file[0]">
                 </div>
                 <div class="mt-8">
                     <PrimaryButton> 登録 </PrimaryButton>

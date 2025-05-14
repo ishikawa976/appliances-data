@@ -28,11 +28,13 @@ const form = useForm({
     shop_id: props.appliance.shop_id,
     disposal: props.appliance.disposal,
     disposal_date: props.appliance.disposal_date,
+    manual: "",
     manual_pdf: props.appliance.manual_pdf,
 
 });
 
     const editAppliance = () => {
+        form.manual_pdf = form.manual.name
         form.patch(route("appliance.update", props.appliance.id));
         console.log(form)
     };
@@ -156,7 +158,7 @@ const form = useForm({
                 </div>
                 <div>
                     <InputLabel for="manual_pdf" value="取扱説明書" />
-                    <input type="file" id="manual_pdf" @input="form.manual_pdf=$event.target.file[0]">
+                    <input type="file" id="manual_pdf" @input="form.manual=$event.target.files[0]">
                 </div>
                 <div class="mt-8">
                     <PrimaryButton> 登録 </PrimaryButton>
