@@ -27,7 +27,7 @@ const form = useForm({
     shop_id: "",
     disposal: false,
     disposal_date: "",
-    manual: "",
+    manual: null,
     manual_pdf: "",
 });
 

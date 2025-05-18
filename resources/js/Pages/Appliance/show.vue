@@ -22,6 +22,7 @@
         appliance: Object,
     });
 
+    const manualPath = "/storage/manual/" + props.appliance.manual_pdf;
 
     const deleteAppliance = (id) => {
         form.delete(route("appliance.destroy", id));
@@ -71,9 +72,14 @@
                    {{ appliance.name }}
                 </div>
             </div>
-            <div v-if="appliance.maker_url!==null">
+            <div v-if="appliance.maker_url!==null"  class="mt-4">
                 <a :href = "appliance.maker_url" class="text-blue-700 hover:border border-b-blue-700">
                     メーカーURLの情報
+                </a>
+            </div>
+            <div v-if="appliance.manual_pdf!==null" class="mt-4">
+                <a :href = manualPath class="text-blue-700 hover:border border-b-blue-700">
+                    取扱説明書
                 </a>
             </div>
             <div class="mt-4">

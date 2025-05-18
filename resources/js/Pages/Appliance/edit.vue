@@ -4,7 +4,7 @@ import InputLabel from "@/Components/InputLabel.vue";
 import TextInput from "@/Components/TextInput.vue";
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import InputError from '@/Components/InputError.vue';
-import { Head, useForm } from '@inertiajs/vue3';
+import { Head, router, useForm } from '@inertiajs/vue3';
 import { computed } from "vue";
 
 const status = computed(() => form.disposal ? '廃棄済' : '所有' );
@@ -28,14 +28,34 @@ const form = useForm({
     shop_id: props.appliance.shop_id,
     disposal: props.appliance.disposal,
     disposal_date: props.appliance.disposal_date,
-    manual: "",
+    manual: null,
     manual_pdf: props.appliance.manual_pdf,
 
 });
 
+//const manual = "";
+
     const editAppliance = () => {
-        form.manual_pdf = form.manual.name
-        form.patch(route("appliance.update", props.appliance.id));
+        if(form.manual){
+            form.manual_pdf = form.manual.name;
+        };
+        
+        router.post(route("appliance.update", props.appliance.id), {
+            _method: 'put',
+            name: form.name,
+            category_id: form.category_id,
+            item_number: form.item_number,
+            serial_number: form.serial_number,
+            manufacture_year: form.manufacture_year,
+            maker_id: form.maker_id,
+            maker_url: form.maker_url,
+            purchase_date: form.purchase_date,
+            shop_id: form.shop_id,
+            disposal: form.disposal,
+            disposal_date: form.disposal_date,
+            manual: form.manual,
+            manual_pdf: form.manual_pdf,
+        });
         console.log(form)
     };
 </script>

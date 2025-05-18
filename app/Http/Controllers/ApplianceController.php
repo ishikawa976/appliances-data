@@ -54,14 +54,14 @@ class ApplianceController extends Controller
             'shop_id' => '',
             'disposal' => 'required',
             'disposal_date' => '',
+            'manual_pdf' => ''
         ]);
 
         
-        
-            //$filename = $request->file('manual_pdf')->getClientOriginalName();
-            //$filename = $request->file('manual_pdf')->$request('item_number').'.pdf';
-            //$request->file('manual_pdf')->storeAs('manual', $filename, 'public');
-        
+        if ($request->manual_pdf!==null) {
+            $filename = $request->manual_pdf;
+            $request->file('manual')->storeAs('manual', $filename, 'public');
+        }
 
         $appliance = Appliance::create($validated);
 
@@ -112,17 +112,20 @@ class ApplianceController extends Controller
             'purchase_date' => '',
             'shop_id' => '',
             'disposal' => 'required',
-            'disposal_date' => ''
+            'disposal_date' => '',
+            'manual_pdf' => ''
         ]);
-
-        if($request->manual_pdf) {
-            $filename = $request->file('manual_pdf')->getClientOriginalName();
-            $request->file('manual_pdf')->storeAs('manual', $filename, 'public');
+        
+        if ($request->manual) {
+            $filename = $request->manual_pdf;
+            $request->file('manual')->storeAs('manual', $filename, 'public');
+            if (!empty($validated['manual_pdf'])) {
+                unlink(storage_path('app/public/manual'). $validated['manual_pdf']);
+            }
         }
-        /*if ($manual = $request->file('manual_pdf')) {
-            $validated['manual_pdf'] = $manual->store('manual', $filename, 'public');
-        }*/
-        dd($request->manual_pdf);
+
+        //unset($validated['manual_pdf']);
+
         $appliance->update($validated);
 
         return redirect()->route('appliance.index');
