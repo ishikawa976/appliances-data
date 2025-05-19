@@ -58,7 +58,7 @@ class ApplianceController extends Controller
         ]);
 
         
-        if ($request->manual_pdf!==null) {
+        if ($request->manual) {
             $filename = $request->manual_pdf;
             $request->file('manual')->storeAs('manual', $filename, 'public');
         }
@@ -107,6 +107,7 @@ class ApplianceController extends Controller
             'category_id' => 'required',
             'item_number' => '',
             'serial_number' => '',
+            'manufacture_year' => '',
             'maker_id' => '',
             'maker_url' => '',
             'purchase_date' => '',
@@ -116,15 +117,15 @@ class ApplianceController extends Controller
             'manual_pdf' => ''
         ]);
         
-        if ($request->manual) {
+        if ($request->file('manual')) {
+            $oldFilename = $appliance->manual_pdf;
+            
+            if ($oldFilename) {
+                unlink(storage_path('app/public/manual/').$oldFilename);
+            }
             $filename = $request->manual_pdf;
             $request->file('manual')->storeAs('manual', $filename, 'public');
-            if (!empty($validated['manual_pdf'])) {
-                unlink(storage_path('app/public/manual'). $validated['manual_pdf']);
-            }
         }
-
-        //unset($validated['manual_pdf']);
 
         $appliance->update($validated);
 
@@ -137,6 +138,12 @@ class ApplianceController extends Controller
      */
     public function destroy(Appliance $appliance)
     {
+        //取扱説明書のファイルを削除
+        $manualFile = $appliance->manual_pdf;
+        if ($manualFile) {
+            unlink(storage_path('app/public/manual/').$manualFile);
+        }
+
         $appliance->delete();
 
         return redirect()->route('appliance.index');

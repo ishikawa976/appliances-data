@@ -178,6 +178,9 @@ const form = useForm({
                 </div>
                 <div>
                     <InputLabel for="manual_pdf" value="取扱説明書" />
+                    <div v-if="form.manual_pdf!==null">
+                        保存されているファイル {{ form.manual_pdf }}
+                    </div>
                     <input type="file" id="manual_pdf" @input="form.manual=$event.target.files[0]">
                 </div>
                 <div class="mt-8">
