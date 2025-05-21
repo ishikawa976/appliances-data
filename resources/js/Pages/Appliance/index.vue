@@ -5,6 +5,10 @@ const props = defineProps({
        appliances: Array,
 });
 
+const manualPath = (manual) =>{
+    return "/storage/manual/" + manual;
+}
+
 </script>
 
 <template>
@@ -22,17 +26,18 @@ const props = defineProps({
                 <table class="border-collapse border border-slate-500 w-full">
                     <thead>
                         <tr>
-                            <th class="border border-slate-600 py-2">品名</th>
+                            <th class="border border-slate-600 py-2 w-5/20">品名</th>
                             <th class="border border-slate-600">カテゴリー</th>
-                            <th class="border border-slate-600 w-1/8">品番</th>
-                            <th class="border border-slate-600 w-1/8">製造番号</th>
-                            <th class="border border-slate-600 w-1/8">製造年</th>
-                            <th class="border border-slate-600 w-1/8">メーカー</th>
-                            <th class="border border-slate-600 w-1/8">メーカーURL</th>
-                            <th class="border border-slate-600 w-1/8">購入日</th>
-                            <th class="border border-slate-600 w-1/8">購入店</th>
-                            <th class="border border-slate-600 w-1/8">現状</th>
-                            <th class="border border-slate-600 w-1/8">廃棄日</th>
+                            <th class="border border-slate-600 w-3/20">品番</th>
+                            <th class="border border-slate-600 w-2/20">製造番号</th>
+                            <th class="border border-slate-600 w-1/20">製造年</th>
+                            <th class="border border-slate-600 w-2/20">メーカー</th>
+                            <th class="border border-slate-600 w-1/20">メーカーURL</th>
+                            <th class="border border-slate-600 w-1/20">取扱説明書</th>
+                            <th class="border border-slate-600 w-1/20">購入日</th>
+                            <th class="border border-slate-600 w-1/20">購入店</th>
+                            <th class="border border-slate-600 w-1/20">現状</th>
+                            <th class="border border-slate-600 w-1/20">廃棄日</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,6 +54,14 @@ const props = defineProps({
                             <td class="border border-slate-700 px-4 py-2">{{ appliance.maker_name }}</td>
                             <td v-if="appliance.maker_url!==null" class="border border-slate-700 sticky text-center text-blue-700">
                                 <a :href = "appliance.maker_url" class="hover:border border-b-blue-700">
+                                    登録済
+                                </a>
+                            </td>
+                            <td v-else class="border border-slate-700 sticky text-center">
+                                未登録
+                            </td>
+                            <td v-if="appliance.manual_pdf!==null" class="border border-slate-700 sticky text-center text-blue-700">
+                                <a :href = manualPath(appliance.manual_pdf) class="hover:border border-b-blue-700">
                                     登録済
                                 </a>
                             </td>
