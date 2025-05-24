@@ -12,6 +12,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ApplianceController;
 use App\Http\Controllers\RecordController;
+use App\Http\Controllers\ImagedController;
 
 
 Route::get('/', function () {
@@ -23,7 +24,7 @@ Route::get('/', function () {
     ]);
 });
 Route::get('test', function () {
-    return Inertia::render('Category/Create');
+    return Inertia::render('Image/create');
 });
 
 Route::get('/dashboard', function () {
@@ -51,5 +52,7 @@ Route::resource('shop', ShopController::class);
 Route::resource('appliance', ApplianceController::class);
 
 Route::resource('record', RecordController::class);
+
+Route::resource('image', ImageController::class);
 
 require __DIR__.'/auth.php';

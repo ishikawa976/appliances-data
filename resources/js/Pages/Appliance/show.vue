@@ -5,6 +5,7 @@
     import BlueButton from '@/Components/BlueButton.vue';
     import RecordCleate from '@/Pages/Record/create.vue';
     import RecordIndex from '@/Pages/Record/index.vue';
+    import ImageCreate from '@/Pages/Image/create.vue';
     import { Head, Link } from '@inertiajs/vue3';
     import { ref } from 'vue';
 
@@ -142,6 +143,9 @@
             </div>
             <div id="overlay" v-show="showContent">
                 <RecordCleate :appliance="props.appliance" v-on:from_child="closeModal" />
+            </div>
+            <div>
+                <ImageCreate :appliance="props.appliance"/>
             </div>
         </div>
         <div v-if="recordsLength !== 0">

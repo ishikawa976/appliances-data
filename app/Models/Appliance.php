@@ -87,4 +87,10 @@ class Appliance extends Model
         return $this->hasMany(Record::class);
     }
 
+    public function images(): HasMany  
+    {
+        return $this->hasMany(Image::class);
+    }
+
+
 };
