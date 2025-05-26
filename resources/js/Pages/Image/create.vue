@@ -6,11 +6,15 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import BlueButton from '@/Components/BlueButton.vue';
 import InputError from '@/Components/InputError.vue';
 import { useForm } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { ref,computed } from 'vue';
 
-const filename = `画像ファイルをアップロードしてください`
+const filename = computed(() => form.image_file ? form.image_file.name: `画像ファイルをアップロードしてください` );
 
-const isEnter = ref(false);
+//const showImage = computed(() => form.image_file ? 'true': 'false');
+
+let isEnter = ref(false);
+
+let url = "";
 
 const props = defineProps({
        appliance: Object,
@@ -19,9 +23,13 @@ const props = defineProps({
 const emit = defineEmits(['from_child']); 
 const form = useForm({
     appliance_id: props.appliance.id,
-    image_file: {},
+    image_file: null,
 });
 
+const previewImage = (image) => {
+    url = URL.createObjectURL(image)
+    console.log(url)
+}
 const dragEnter = () => {
     isEnter = true;
 }
@@ -29,11 +37,12 @@ const dragLeave = () => {
     isEnter = false;
 }
 
-const dropFile = () => {
+const dropFile = (event) => {
     
-    //form.image_file = $event.dataTransfer.files[0]
-    //filename = form.image_file.name
-    console.log($event.dataTransfer.files)
+    form.image_file = event.dataTransfer.files[0]
+    previewImage(form.image_file)
+    console.log(event.dataTransfer.files[0])
+    console.log(showImage)
 }
     const createImage = () => {
         form.post(route("image.store"));
@@ -58,13 +67,20 @@ const dropFile = () => {
         border: 5px solid gray;
         border-radius: 15px;
     }
+
+    .enter {
+        border: 10px solid powderblue;
+    }
 </style>
 <template>
     <div class="bg-white mx-6 my-6 px-24 py-6 w-2/3" enctype=”multipart/form-data”>
         <div class="text-2xl">
             {{ appliance.name }}（{{ appliance.item_number }}）の画像登録
         </div>
-        <div class="drop_area" @dragenter="dragEnter" @dragleave="dragLeave" @dragover.prevent @drop.prevent="form.image_file=$event.dataTransfer.files[0]" :class="{enter: isEnter}">
+        <div v-show="isEnter" class="mt-4">
+             <img :src="url" />
+        </div>
+        <div class="drop_area" @dragenter="dragEnter" @dragleave="dragLeave" @dragover.prevent @drop.prevent="dropFile" :class="{enter: isEnter}">
             {{ filename }}
         </div>
         <div class="mt-8 flex flex-row gap-12">
