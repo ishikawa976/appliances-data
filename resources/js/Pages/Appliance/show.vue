@@ -3,6 +3,7 @@
     import PrimaryButton from "@/Components/PrimaryButton.vue";
     import DeleteButton from '@/Components/DeleteButton.vue';
     import BlueButton from '@/Components/BlueButton.vue';
+    import GreenButton from '@/Components/GreenButton.vue';
     import RecordCleate from '@/Pages/Record/create.vue';
     import RecordIndex from '@/Pages/Record/index.vue';
     import ImageCreate from '@/Pages/Image/create.vue';
@@ -10,7 +11,7 @@
     import { ref } from 'vue';
 
     const showContent = ref(false);
-
+    const showImageCreate = ref(false);
     const openModal = () => {
         showContent.value = true;
       };
@@ -18,7 +19,14 @@
       const closeModal = () => {
         showContent.value = false;
       };
+    
+      const openCreate = () => {
+        showImageCreate.value = true;
+      };
 
+      const closeCreate = () => {
+        showImageCreate.value = false;
+      };
     const props = defineProps({
         appliance: Object,
     });
@@ -140,12 +148,15 @@
                 <BlueButton v-on:click="openModal">
                     情報登録
                 </BlueButton>
+                <GreenButton v-on:click="openCreate">
+                    画像登録
+                </GreenButton>
             </div>
             <div id="overlay" v-show="showContent">
                 <RecordCleate :appliance="props.appliance" v-on:from_child="closeModal" />
             </div>
-            <div>
-                <ImageCreate :appliance="props.appliance"/>
+            <div id="overlay" v-show="showImageCreate">
+                <ImageCreate :appliance="props.appliance" v-on:from_child="closeCreate" />
             </div>
         </div>
         <div v-if="recordsLength !== 0">
