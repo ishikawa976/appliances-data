@@ -14,7 +14,7 @@ const filename = computed(() => form.image_file ? form.image_file.name: `画像�
 
 let isEnter = ref(false);
 
-let url = "";
+let url = ref("");
 
 const props = defineProps({
        appliance: Object,
@@ -51,7 +51,8 @@ const dropFile = (event) => {
     };
 
     const clickEvent = () => {
-      emit('from_child');
+        form.image_file = null
+        emit('from_child');
     };
 </script>
 <style>
@@ -62,8 +63,8 @@ const dropFile = (event) => {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 500px;
-        height: 300px;
+        width: 300px;
+        height: 200px;
         border: 5px solid gray;
         border-radius: 15px;
     }
@@ -78,7 +79,7 @@ const dropFile = (event) => {
             {{ appliance.name }}（{{ appliance.item_number }}）の画像登録
         </div>
         <div v-show="isEnter" class="mt-4">
-             <img :src="url" />
+             <img :src="url" width="20%" height="20%" />
         </div>
         <div class="drop_area" @dragenter="dragEnter" @dragleave="dragLeave" @dragover.prevent @drop.prevent="dropFile" :class="{enter: isEnter}">
             {{ filename }}
