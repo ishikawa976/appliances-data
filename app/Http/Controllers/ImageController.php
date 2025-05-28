@@ -28,7 +28,20 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'appliance_id' => 'required',
+            'image_title' => 'required'
+        ]);
+        dd($request->file('image_file'));
+        if($request->image_file){
+            $imageName = $request->image_file->name;
+            $request->file('image_file')->storeAs('image', $imageName, 'public');
+        }
+
+        $validated['image_title'] = $imageName;
+        $image = Image::create($validated);
+
+        return redirect()->route('appliance.index');
     }
 
     /**

@@ -5,7 +5,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import BlueButton from '@/Components/BlueButton.vue';
 import InputError from '@/Components/InputError.vue';
-import { useForm } from '@inertiajs/vue3';
+import { useForm, router } from '@inertiajs/vue3';
 import { ref,computed } from 'vue';
 
 const filename = computed(() => form.image_file ? form.image_file.name: `画像ファイルをアップロードしてください` );
@@ -41,11 +41,14 @@ const dropFile = (event) => {
     
     form.image_file = event.dataTransfer.files[0]
     previewImage(form.image_file)
-    console.log(event.dataTransfer.files[0])
-    console.log(showImage)
+    console.log(form)
 }
     const createImage = () => {
-        form.post(route("image.store"));
+        router.post(route("image.store"),{
+            _method: 'put',
+             appliance_id: form.appliance_id,
+             image_file: form.image_file
+        });
         clickEvent();
         console.log(form)
     };
@@ -74,10 +77,11 @@ const dropFile = (event) => {
     }
 </style>
 <template>
-    <div class="bg-white mx-6 my-6 px-24 py-6 w-2/3" enctype=”multipart/form-data”>
+    <div class="bg-white mx-6 my-6 px-24 py-6 w-2/3">
         <div class="text-2xl">
             {{ appliance.name }}（{{ appliance.item_number }}）の画像登録
         </div>
+        <form @submit.prevent="createImage" enctype=”multipart/form-data”>
         <div v-show="isEnter" class="mt-4">
              <img :src="url" width="20%" height="20%" />
         </div>
@@ -88,9 +92,11 @@ const dropFile = (event) => {
             <PrimaryButton v-on:click="createImage">
                 登録
             </PrimaryButton>
-            <BlueButton v-on:click="clickEvent">
-                閉じる
-            </BlueButton>
+            
         </div>
+        </form>
+        <BlueButton v-on:click="clickEvent">
+                閉じる
+        </BlueButton>
     </div>
 </template>

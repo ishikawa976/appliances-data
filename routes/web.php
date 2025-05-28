@@ -12,7 +12,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ApplianceController;
 use App\Http\Controllers\RecordController;
-use App\Http\Controllers\ImagedController;
+use App\Http\Controllers\ImageController;
 
 
 Route::get('/', function () {
