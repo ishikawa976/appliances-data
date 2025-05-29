@@ -44,17 +44,13 @@ const dropFile = (event) => {
     console.log(form)
 }
     const createImage = () => {
-        router.post(route("image.store"),{
-            _method: 'put',
-             appliance_id: form.appliance_id,
-             image_file: form.image_file
-        });
-        clickEvent();
+        form.post(route("image.store"));
+        emit('from_child')
         console.log(form)
     };
 
     const clickEvent = () => {
-        form.image_file = null
+        //form.image_file = null
         emit('from_child');
     };
 </script>
@@ -81,7 +77,7 @@ const dropFile = (event) => {
         <div class="text-2xl">
             {{ appliance.name }}（{{ appliance.item_number }}）の画像登録
         </div>
-        <form @submit.prevent="createImage" enctype=”multipart/form-data”>
+        <form @submit.prevent="createImage" enctype="multipart/form-data">
         <div v-show="isEnter" class="mt-4">
              <img :src="url" width="20%" height="20%" />
         </div>
@@ -89,7 +85,7 @@ const dropFile = (event) => {
             {{ filename }}
         </div>
         <div class="mt-8 flex flex-row gap-12">
-            <PrimaryButton v-on:click="createImage">
+            <PrimaryButton>
                 登録
             </PrimaryButton>
             

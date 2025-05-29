@@ -30,18 +30,17 @@ class ImageController extends Controller
     {
         $validated = $request->validate([
             'appliance_id' => 'required',
-            'image_title' => 'required'
         ]);
-        dd($request->file('image_file'));
-        if($request->image_file){
-            $imageName = $request->image_file->name;
+    
+        if($request->file('image_file')){
+            $imageName = $request->file('image_file')->getClientOriginalName();
             $request->file('image_file')->storeAs('image', $imageName, 'public');
         }
 
         $validated['image_title'] = $imageName;
         $image = Image::create($validated);
 
-        return redirect()->route('appliance.show', $record->appliance_id);
+        return redirect()->route('appliance.show',  $request->appliance_id);
     }
 
     /**
