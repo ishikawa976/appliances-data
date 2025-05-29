@@ -50,7 +50,9 @@ const dropFile = (event) => {
     };
 
     const clickEvent = () => {
-        //form.image_file = null
+        form.image_file = null;
+        url = "";
+        isEnter = false;
         emit('from_child');
     };
 </script>
