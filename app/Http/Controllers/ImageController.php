@@ -41,7 +41,7 @@ class ImageController extends Controller
         $validated['image_title'] = $imageName;
         $image = Image::create($validated);
 
-        return redirect()->route('appliance.index');
+        return redirect()->route('appliance.show', $record->appliance_id);
     }
 
     /**
