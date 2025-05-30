@@ -1,16 +1,12 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-//import InputLabel from "@/Components/InputLabel.vue";
-//import TextInput from "@/Components/TextInput.vue";
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import BlueButton from '@/Components/BlueButton.vue';
-import InputError from '@/Components/InputError.vue';
+import GreenButton from '@/Components/GreenButton.vue';
 import { useForm, router } from '@inertiajs/vue3';
 import { ref,computed } from 'vue';
 
 const filename = computed(() => form.image_file ? form.image_file.name: `画像ファイルをアップロードしてください` );
 
-//const showImage = computed(() => form.image_file ? 'true': 'false');
 
 let isEnter = ref(false);
 
@@ -37,6 +33,11 @@ const dragLeave = () => {
     isEnter = false;
 }
 
+const delateFile = () => {
+    form.image_file = null;
+     url = "";
+    isEnter = false;
+}
 const dropFile = (event) => {
     
     form.image_file = event.dataTransfer.files[0]
@@ -45,14 +46,12 @@ const dropFile = (event) => {
 }
     const createImage = () => {
         form.post(route("image.store"));
-        emit('from_child')
+        clickEvent();
         console.log(form)
     };
 
     const clickEvent = () => {
-        form.image_file = null;
-        url = "";
-        isEnter = false;
+        delateFile();
         emit('from_child');
     };
 </script>
@@ -86,15 +85,20 @@ const dropFile = (event) => {
         <div class="drop_area" @dragenter="dragEnter" @dragleave="dragLeave" @dragover.prevent @drop.prevent="dropFile" :class="{enter: isEnter}">
             {{ filename }}
         </div>
-        <div class="mt-8 flex flex-row gap-12">
+        <div class="mt-8">
             <PrimaryButton>
                 登録
             </PrimaryButton>
             
         </div>
         </form>
-        <BlueButton v-on:click="clickEvent">
+        <div class="mt-8 flex flex-row gap-12">
+            <GreenButton  v-on:click="delateFile">
+                消去
+            </GreenButton>
+            <BlueButton v-on:click="clickEvent">
                 閉じる
-        </BlueButton>
+            </BlueButton>
+        </div>
     </div>
 </template>
