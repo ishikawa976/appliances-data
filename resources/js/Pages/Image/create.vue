@@ -78,21 +78,22 @@ const dropFile = (event) => {
         <div class="text-2xl">
             {{ appliance.name }}（{{ appliance.item_number }}）の画像登録
         </div>
+        <div class="flex justify-center">
         <form @submit.prevent="createImage" enctype="multipart/form-data">
-        <div v-show="isEnter" class="mt-4">
-             <img :src="url" width="20%" height="20%" />
-        </div>
-        <div class="drop_area" @dragenter="dragEnter" @dragleave="dragLeave" @dragover.prevent @drop.prevent="dropFile" :class="{enter: isEnter}">
-            {{ filename }}
-        </div>
-        <div class="mt-8">
-            <PrimaryButton>
-                登録
-            </PrimaryButton>
-            
-        </div>
+            <div v-show="isEnter" class="mt-4">
+                <img :src="url" width="20%" height="20%" />
+            </div>
+            <div class="drop_area" @dragenter="dragEnter" @dragleave="dragLeave" @dragover.prevent @drop.prevent="dropFile" :class="{enter: isEnter}">
+                {{ filename }}
+            </div>
+            <div class="mt-8">
+                <PrimaryButton>
+                    登録
+                </PrimaryButton>
+            </div>
         </form>
-        <div class="mt-8 flex flex-row gap-12">
+        </div>
+        <div class="mt-2 flex flex-row gap-4">
             <GreenButton  v-on:click="delateFile">
                 消去
             </GreenButton>

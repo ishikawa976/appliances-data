@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Image;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ImageController extends Controller
 {
@@ -46,9 +47,10 @@ class ImageController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Image $image)
+    public function show($id)
     {
-        //
+        $image = Image::with('appliance')->find($id);
+        return Inertia::render('Image/show',['image' => $image]); 
     }
 
     /**
