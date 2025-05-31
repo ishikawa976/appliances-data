@@ -74,6 +74,15 @@ class ImageController extends Controller
      */
     public function destroy(Image $image)
     {
-        //
+        $appliance_id = $image->appliance_id;
+
+        $imageFile = $image->image_titlef;
+        if ($imageFile) {
+            unlink(storage_path('app/public/image/').$imageFile);
+        }
+
+        $image->delete();
+
+        return redirect()->route('appliance.show', $appliance_id);
     }
 }

@@ -7,6 +7,7 @@
     import RecordCleate from '@/Pages/Record/create.vue';
     import RecordIndex from '@/Pages/Record/index.vue';
     import ImageCreate from '@/Pages/Image/create.vue';
+    import ImageIndex from '@/Pages/Image/index.vue';
     import { Head, Link } from '@inertiajs/vue3';
     import { ref } from 'vue';
 
@@ -33,6 +34,9 @@
 
     const manualPath = "/storage/manual/" + props.appliance.manual_pdf;
 
+    const imagePath = (image) =>{
+        return "/storage/image/" + image;
+    }
     const deleteAppliance = (id) => {
         form.delete(route("appliance.destroy", id));
     };
@@ -46,6 +50,8 @@
     };
 
     const recordsLength = props.appliance.records.length;
+
+    const imagesLength = props.appliance.images.length;
 </script>
 <style>
     #overlay{
@@ -80,6 +86,9 @@
                 <div class="text-2xl">
                    {{ appliance.name }}
                 </div>
+            </div>
+            <div v-if="imagesLength !== 0" class="mt-4">
+                <ImageIndex :images="props.appliance.images"/>
             </div>
             <div v-if="appliance.maker_url!==null"  class="mt-4">
                 <a :href = "appliance.maker_url" class="text-blue-700 hover:border border-b-blue-700">

@@ -1,16 +1,16 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import DeleteButton from '@/Components/DeleteButton.vue';
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, useForm} from '@inertiajs/vue3';
 
     const props = defineProps({
         image: Object,
     });
-
+    const form = useForm({});
     const imagePath = "/storage/image/" + props.image.image_title;
 
-    const deleteImage = () => {
-        form.delete(route("image.destroy", props.image.id));
+    const deleteImage = (id) => {
+        form.delete(route("image.destroy", id));
     };
 
 </script>
@@ -27,7 +27,7 @@ import { Head, Link } from '@inertiajs/vue3';
                 <img :src=imagePath width="60%" height="60%">
             </div>
             <div class="bg-white mt-12 mx-24 p-4 flex justify-center">
-                <DeleteButton v-on:click="deleteImage">
+                <DeleteButton v-on:click="deleteImage(image.id)">
                     削除
                 </DeleteButton>
             </div>

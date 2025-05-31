@@ -75,7 +75,7 @@ class ApplianceController extends Controller
     {
         $appliance = Appliance::with(['records' => function($query){
             $query->orderBy('record_date', 'desc');
-        }])->find($id);
+        }],)->with('images')->find($id);
         //dd($appliance);
         return Inertia::render('Appliance/show',['appliance' => $appliance]);
     }
