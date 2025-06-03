@@ -58,7 +58,7 @@ class ApplianceController extends Controller
         ]);
 
         
-        if ($request->manual) {
+        if ($request->file('manual')) {
             $filename = $request->manual_pdf;
             $request->file('manual')->storeAs('manual', $filename, 'public');
         }

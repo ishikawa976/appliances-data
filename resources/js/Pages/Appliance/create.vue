@@ -32,7 +32,9 @@ const form = useForm({
 });
 
     const createAppliance = () => {
-        form.manual_pdf = form.manual.name
+        if(form.manual){
+            form.manual_pdf = form.manual.name;
+        }
         form.post(route("appliance.store"));
         console.log(form)
     };
