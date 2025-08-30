@@ -7,7 +7,8 @@
     import RecordCleate from '@/Pages/Record/create.vue';
     import RecordIndex from '@/Pages/Record/index.vue';
     import ImageCreate from '@/Pages/Image/create.vue';
-    import ImageIndex from '@/Pages/Image/index.vue';
+    //import ImageIndex from '@/Pages/Image/index.vue';
+    import Slideshow from '@/Pages/Image/Slideshow.vue';
     import { Head, Link } from '@inertiajs/vue3';
     import { ref } from 'vue';
 
@@ -88,7 +89,7 @@
                 </div>
             </div>
             <div v-if="imagesLength !== 0" class="mt-4">
-                <ImageIndex :images="props.appliance.images"/>
+                <Slideshow :images="props.appliance.images"/>
             </div>
             <div v-if="appliance.maker_url!==null"  class="mt-4">
                 <a :href = "appliance.maker_url" class="text-blue-700 hover:border border-b-blue-700">
