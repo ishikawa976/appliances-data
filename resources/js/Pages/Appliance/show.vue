@@ -89,7 +89,9 @@
                 </div>
             </div>
             <div v-if="imagesLength !== 0" class="mt-4">
-                <Slideshow :images="props.appliance.images"/>
+                <div class="flex justify-center">
+                    <Slideshow :images="props.appliance.images"/>
+                </div>
             </div>
             <div v-if="appliance.maker_url!==null"  class="mt-4">
                 <a :href = "appliance.maker_url" class="text-blue-700 hover:border border-b-blue-700">

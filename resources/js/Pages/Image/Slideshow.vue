@@ -25,7 +25,7 @@ const imagePath = (image) =>{
   <div class="relative w-[500px]">
     <div id="main" class="flex justify-center">
         <a :href = "route('image.show', props.images[currentIndex].id)">
-            <img :src=imagePath(images[currentIndex])  />
+            <img :src=imagePath(images[currentIndex]) />
         </a>
     </div>
     <button
